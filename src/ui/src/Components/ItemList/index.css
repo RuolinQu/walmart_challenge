@@ -1,8 +1,15 @@
 .ageTable-wrapper {
   width: 60%;
+  margin: 0 auto;
 }
 
 .menu-wrapper {
-  width: 20%;
-  height: 1000px;
+  width: 50%;
+  /* height: 1000px; */
+  padding-bottom: 5rem;
+}
+
+header {
+  font-size: 2rem;
+  padding: 1.2rem 1.2rem;
 }

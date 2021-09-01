@@ -22,7 +22,7 @@ const getUsers = () => {
 };
 
 const getItems = () => {
-    console.log(111)
+
     const dataAccessMethod = () => {
       let items = [];
       _.map(db.itemsOfUserByUsername, itemsList => {
@@ -32,7 +32,6 @@ const getItems = () => {
           }
         });
       });
-      console.log(items)
       return items;
     };
     return mockDBCall(dataAccessMethod);
@@ -62,24 +61,6 @@ const getListOfAgesOfUsersWith = (item) => {
     }
     return mockDBCall(dataAccessMethod);
 
-
-    // const dataAccessMethod = () => {
-    //     const usersByid = db.usersById;
-    //     const itemOfUsers = db.itemsOfUserByUsername;
-    //     let ans = {}
-    //     for (let key in usersByid) {
-    //         let userName = usersByid[key].username;
-    //         let age = usersByid[key].age;
-    //         if (itemOfUsers[userName].includes(item)) {
-    //             if (age in ans) ans[age]++
-    //             else ans[age]=1
-    //             console.log(userName,age)
-    //         }
-    //     }
-    //     console.log(ans)
-    //     return ans
-    // }
-    // return mockDBCall(dataAccessMethod);
 }
 
 module.exports = {

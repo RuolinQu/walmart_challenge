@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import { getItems,getListOfAge } from '../../API/tableAPI.js'
 import { Select,Table} from 'antd'
+import { nanoid } from 'nanoid';
 
 import './index.css'
-import { set } from 'lodash';
 
 const { Option } = Select;
 
@@ -27,7 +27,8 @@ export default function ItemList() {
     const [items,setItems]=useState([])
     const [curItem,setCurItem]=useState("____")
     const [data, setData] = useState([])
-    const [cols,setCols]= useState([])
+    const [cols, setCols] = useState([])
+    const [loading,setLoading]= useState(false)
 
     useEffect(() => {
         getItems().then(data => {
@@ -36,7 +37,9 @@ export default function ItemList() {
     }, [])
 
     useEffect(() => {
+        setLoading(true)
         getListOfAge(curItem).then(res => {
+            setLoading(false)
             setData(res)
         })
     }, [curItem])
@@ -45,10 +48,9 @@ export default function ItemList() {
         getListOfAge(curItem).then(data => {
             let obj=[]
             data.forEach((item, index) => {
-                obj.push({ 'age':item[0],'count':item[1]})
+                obj.push({ 'age':item[0],'count':item[1],'key':nanoid()})
             })
             setCols(obj)
-            console.log(cols)
         })
     }, [data])
 
@@ -61,18 +63,24 @@ export default function ItemList() {
         <div className="ageTable-wrapper">
             <header>Age DemoGraphic of Users With {curItem}</header>
             <div className="menu-wrapper">
-                <Select style={{ width: 120 }} onChange={handleChange}>
+                <Select style={{ width: 120 }}
+                    placeholder="item"
+                    onChange={handleChange}>
                     {items.map((item, index) => (
-                        <Option value={item}>{item}</Option>
+                        <Option
+                            key={nanoid()}
+                            value={item}
+                        >{item}</Option>
                     ))}
                 </Select>
                 <Table
                 columns={columns}
                 dataSource={cols}
-                bordered
-            />
+                    loading={loading}
+                    bordered
+                    
+                 />
             </div>
- 
         </div>
     )
 }

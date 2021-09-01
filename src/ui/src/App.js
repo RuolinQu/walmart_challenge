@@ -1,14 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-
 import UsersTable from './Components/UsersTable'
 import ItemList from './Components/ItemList'
 
+import './App.css'
+
 function App() {
   return (
-    <div className="App">
-      <UsersTable />
-      <ItemList/>
+    <div className="app">
+      <div className="App-wrapper">
+        <UsersTable />
+        <ItemList/>
+      </div>
     </div>
   );
 }
